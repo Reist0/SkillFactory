@@ -1,0 +1,53 @@
+board_ =   {'1': ' ', '2': ' ', '3': ' ',
+            '4': ' ', '5': ' ', '6': ' ',
+            '7': ' ', '8': ' ', '9': ' '}
+
+board_keys = []
+
+for i in board_:
+    board_keys.append(i)
+
+def field(field_):
+    print(field_['1'] + '|' + field_['2'] + '|' + field_['3'])
+    print('-+-+-')
+    print(field_['4'] + '|' + field_['5'] + '|' + field_['6'])
+    print('-+-+-')
+    print(field_['7'] + '|' + field_['8'] + '|' + field_['9'])
+
+def take_input():
+    turn = 'X'
+    count = 0
+
+    for i in range(10):
+        field(board_)
+        print('Твой ход\t' + turn + '\t1-9')
+
+        cage = input()
+
+        if board_[cage] == ' ':
+            board_[cage] = turn
+            count += 1
+        else:
+            print('Клетка занята')
+            continue
+
+        if count >= 3:
+            if board_['1'] == board_['2'] == board_['3'] != ' ' or board_['4'] == board_['5'] == board_['6'] != ' ' or \
+                    board_['7'] == board_['8'] == board_['9'] != ' ' or \
+                    board_['1'] == board_['5'] == board_['9'] != ' ' or \
+                    board_['3'] == board_['5'] == board_['7'] != ' ' or \
+                    board_['1'] == board_['4'] == board_['7'] != ' ' or \
+                    board_['2'] == board_['5'] == board_['8'] != ' ' or \
+                    board_['3'] == board_['6'] == board_['9'] != ' ':
+                    field(board_)
+                    print('Игра окончена\t' + turn + '\tпобедил')
+                    break
+        if count == 9:
+            print('Игра окончена\nНичья')
+
+        if turn == 'X':
+            turn = 'O'
+        else:
+            turn = 'X'
+
+take_input()
